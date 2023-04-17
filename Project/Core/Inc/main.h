@@ -57,6 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Front_IN1_Pin GPIO_PIN_1
+#define Front_IN1_GPIO_Port GPIOA
+#define Front_IN3_Pin GPIO_PIN_2
+#define Front_IN3_GPIO_Port GPIOA
 #define HCSR04_Front_TRIG_Pin GPIO_PIN_3
 #define HCSR04_Front_TRIG_GPIO_Port GPIOA
 #define HCSR04_Front_ECHO_Pin GPIO_PIN_4
@@ -73,6 +77,18 @@ void Error_Handler(void);
 #define HCSR04_Right_TRIG_GPIO_Port GPIOB
 #define HCSR04_Right_ECHO_Pin GPIO_PIN_2
 #define HCSR04_Right_ECHO_GPIO_Port GPIOB
+#define Front_IN2_Pin GPIO_PIN_10
+#define Front_IN2_GPIO_Port GPIOB
+#define Front_IN4_Pin GPIO_PIN_11
+#define Front_IN4_GPIO_Port GPIOB
+#define Back_IN1_Pin GPIO_PIN_12
+#define Back_IN1_GPIO_Port GPIOB
+#define Back_IN3_Pin GPIO_PIN_13
+#define Back_IN3_GPIO_Port GPIOB
+#define Back_IN2_Pin GPIO_PIN_14
+#define Back_IN2_GPIO_Port GPIOB
+#define Back_IN4_Pin GPIO_PIN_15
+#define Back_IN4_GPIO_Port GPIOB
 #define InfraredSensor_1_Pin GPIO_PIN_3
 #define InfraredSensor_1_GPIO_Port GPIOB
 #define InfraredSensor_2_Pin GPIO_PIN_4

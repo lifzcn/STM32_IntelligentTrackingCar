@@ -18,12 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "hcsr04.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,11 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	float frontDistanceValue = 0;
+	float backDistanceValue = 0;
+	float leftDistanceValue = 0;
+	float rightDistanceValue = 0;
+	uint8_t distanceLimitValue = 10;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -87,6 +92,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -95,6 +101,41 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		frontDistanceValue = HCSR04_Front_GetDistance_Repeatedly(5);
+		backDistanceValue = HCSR04_Back_GetDistance_Repeatedly(5);
+		leftDistanceValue = HCSR04_Left_GetDistance_Repeatedly(5);
+		rightDistanceValue = HCSR04_Right_GetDistance_Repeatedly(5);
+		if(frontDistanceValue>=distanceLimitValue && backDistanceValue>=distanceLimitValue && leftDistanceValue>=distanceLimitValue && rightDistanceValue>=distanceLimitValue)
+		{
+			HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			if(HAL_GPIO_ReadPin(InfraredSensor_3_GPIO_Port, InfraredSensor_3_Pin) == GPIO_PIN_SET)
+			{
+				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_SET);
+			}
+			else if(HAL_GPIO_ReadPin(InfraredSensor_1_GPIO_Port, InfraredSensor_1_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(InfraredSensor_2_GPIO_Port, InfraredSensor_2_Pin) == GPIO_PIN_SET)
+			{
+				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_SET);
+			}
+			else if(HAL_GPIO_ReadPin(InfraredSensor_4_GPIO_Port, InfraredSensor_4_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(InfraredSensor_5_GPIO_Port, InfraredSensor_5_Pin) == GPIO_PIN_SET)
+			{
+				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_RESET);
+			}
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
