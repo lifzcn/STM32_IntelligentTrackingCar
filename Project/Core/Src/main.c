@@ -114,21 +114,21 @@ int main(void)
 		}
 		else
 		{
-			if(HAL_GPIO_ReadPin(InfraredSensor_3_GPIO_Port, InfraredSensor_3_Pin) == GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(InfraredSensor_3_GPIO_Port, InfraredSensor_3_Pin) == GPIO_PIN_RESET)
 			{
 				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_SET);
 			}
-			else if(HAL_GPIO_ReadPin(InfraredSensor_1_GPIO_Port, InfraredSensor_1_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(InfraredSensor_2_GPIO_Port, InfraredSensor_2_Pin) == GPIO_PIN_SET)
+			else if(HAL_GPIO_ReadPin(InfraredSensor_1_GPIO_Port, InfraredSensor_1_Pin) == GPIO_PIN_RESET || HAL_GPIO_ReadPin(InfraredSensor_2_GPIO_Port, InfraredSensor_2_Pin) == GPIO_PIN_RESET)
 			{
 				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(Back_IN1_GPIO_Port, Back_IN1_Pin, GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(Back_IN2_GPIO_Port, Back_IN2_Pin, GPIO_PIN_SET);
 			}
-			else if(HAL_GPIO_ReadPin(InfraredSensor_4_GPIO_Port, InfraredSensor_4_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(InfraredSensor_5_GPIO_Port, InfraredSensor_5_Pin) == GPIO_PIN_SET)
+			else if(HAL_GPIO_ReadPin(InfraredSensor_4_GPIO_Port, InfraredSensor_4_Pin) == GPIO_PIN_RESET || HAL_GPIO_ReadPin(InfraredSensor_5_GPIO_Port, InfraredSensor_5_Pin) == GPIO_PIN_RESET)
 			{
 				HAL_GPIO_WritePin(Front_IN1_GPIO_Port, Front_IN1_Pin, GPIO_PIN_SET);
 				HAL_GPIO_WritePin(Front_IN2_GPIO_Port, Front_IN2_Pin, GPIO_PIN_RESET);
