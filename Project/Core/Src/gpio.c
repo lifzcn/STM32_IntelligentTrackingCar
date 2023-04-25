@@ -58,6 +58,12 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, HCSR04_Right_TRIG_Pin|Front_IN2_Pin|Front_IN4_Pin|Back_IN1_Pin
                           |Back_IN3_Pin|Back_IN2_Pin|Back_IN4_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pins : PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = HCSR04_Right_ECHO_Pin|HCSR04_Front_ECHO_Pin|HCSR04_Back_ECHO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin
                            PAPin */
   GPIO_InitStruct.Pin = Front_IN1_Pin|Front_IN3_Pin|HCSR04_Front_TRIG_Pin|HCSR04_Back_TRIG_Pin
@@ -67,16 +73,10 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin */
-  GPIO_InitStruct.Pin = HCSR04_Front_ECHO_Pin|HCSR04_Back_ECHO_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin
-                           PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = HCSR04_Left_ECHO_Pin|HCSR04_Right_ECHO_Pin|InfraredSensor_1_Pin|InfraredSensor_2_Pin
-                          |InfraredSensor_3_Pin|InfraredSensor_4_Pin|InfraredSensor_5_Pin;
+                           PBPin PBPin */
+  GPIO_InitStruct.Pin = HCSR04_Left_ECHO_Pin|InfraredSensor_1_Pin|InfraredSensor_2_Pin|InfraredSensor_3_Pin
+                          |InfraredSensor_4_Pin|InfraredSensor_5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);

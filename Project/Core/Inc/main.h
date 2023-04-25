@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define HCSR04_Right_ECHO_Pin GPIO_PIN_0
+#define HCSR04_Right_ECHO_GPIO_Port GPIOA
 #define Front_IN1_Pin GPIO_PIN_1
 #define Front_IN1_GPIO_Port GPIOA
 #define Front_IN3_Pin GPIO_PIN_2
@@ -75,8 +77,6 @@ void Error_Handler(void);
 #define HCSR04_Left_ECHO_GPIO_Port GPIOB
 #define HCSR04_Right_TRIG_Pin GPIO_PIN_1
 #define HCSR04_Right_TRIG_GPIO_Port GPIOB
-#define HCSR04_Right_ECHO_Pin GPIO_PIN_2
-#define HCSR04_Right_ECHO_GPIO_Port GPIOB
 #define Front_IN2_Pin GPIO_PIN_10
 #define Front_IN2_GPIO_Port GPIOB
 #define Front_IN4_Pin GPIO_PIN_11
